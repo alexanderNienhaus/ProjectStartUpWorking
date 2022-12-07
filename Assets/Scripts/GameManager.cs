@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -141,12 +140,11 @@ public class GameManager : MonoBehaviour
                 fightingPlayerObject.GetComponent<Character>().isFighting = false;
             }
 
-            print("organSceneActive: "+organSceneActive + " fightingPlayerObjects.Count: " + fightingPlayerObjects.Count);
+            //print("organSceneActive: "+organSceneActive + " fightingPlayerObjects.Count: " + fightingPlayerObjects.Count);
             //Put all fighting objects back in roster
             int i = 0;
             foreach (Transform rosterPosition in rosterPositions)
             {
-                print("in");
                 if (i >= (organSceneActive ? organs.Count : viruses.Count))
                     break;
 
@@ -281,7 +279,17 @@ public class GameManager : MonoBehaviour
             }
 
             //Free roll??
-            DestroyShop();
+            print("organSceneActive: "+organSceneActive);
+            foreach (Transform shopObject in shopObjetcs)
+            {
+                if (!(!organSceneActive ? frozenShopOrgans : frozenShopViruses).Contains(shopObject) && shopObject != null)
+                {
+                    //print("DESTROY "+shopObject.name);
+                    Destroy(shopObject.gameObject);
+                }
+            }
+            shopObjetcs.Clear();
+            shopObjetcs.AddRange(organSceneActive ? frozenShopOrgans : frozenShopViruses);
             SpawnShop();
         }
     }
@@ -360,12 +368,14 @@ public class GameManager : MonoBehaviour
         {
             //Put only in open shop position
             bool positionOccupied = false;
-            foreach (Transform frozenOrgan in organSceneActive ? frozenShopOrgans : frozenShopViruses)
+            foreach (Transform frozenObject in organSceneActive ? frozenShopOrgans : frozenShopViruses)
             {
-                if (frozenOrgan == null)
+                if (frozenObject == null)
                     continue;
 
-                if (frozenOrgan.position == shopPosition.position)
+                //print(frozenObject.name + " frozenObject.position: " + frozenObject.position + " shopPosition.position: " + shopPosition.position);
+
+                if (frozenObject.position == shopPosition.position)
                 {
                     positionOccupied = true;
                     break;
@@ -451,7 +461,10 @@ public class GameManager : MonoBehaviour
         foreach (Transform shopObject in shopObjetcs)
         {
             if (!(organSceneActive ? frozenShopOrgans : frozenShopViruses).Contains(shopObject) && shopObject != null)
+            {
+                //print("DESTROY "+shopObject.name);
                 Destroy(shopObject.gameObject);
+            }
         }
         shopObjetcs.Clear();
         shopObjetcs.AddRange(organSceneActive ? frozenShopOrgans : frozenShopViruses);
@@ -661,7 +674,295 @@ public class GameManager : MonoBehaviour
                 CheckForCombineObjects();
         } else
         {
+            List<Transform> aidsLevelOne = new List<Transform>();
+            List<Transform> hepatitisLevelOne = new List<Transform>();
+            List<Transform> herpesLevelOne = new List<Transform>();
+            List<Transform> influenzaLevelOne = new List<Transform>();
+            List<Transform> juninLevelOne = new List<Transform>();
+            List<Transform> lassaLevelOne = new List<Transform>();
+            List<Transform> measlesLevelOne = new List<Transform>();
+            List<Transform> mumpsLevelOne = new List<Transform>();
+            List<Transform> vzvLevelOne = new List<Transform>();
+            List<Transform> aidsLevelTwo = new List<Transform>();
+            List<Transform> hepatitisLevelTwo = new List<Transform>();
+            List<Transform> herpesLevelTwo = new List<Transform>();
+            List<Transform> influenzaLevelTwo = new List<Transform>();
+            List<Transform> juninLevelTwo = new List<Transform>();
+            List<Transform> lassaLevelTwo = new List<Transform>();
+            List<Transform> measlesLevelTwo = new List<Transform>();
+            List<Transform> mumpsLevelTwo = new List<Transform>();
+            List<Transform> vzvLevelTwo = new List<Transform>();
 
+            foreach (Transform virus in viruses)
+            {
+                if (virus.name.Contains("Aids"))
+                {
+                    if (virus.GetComponent<Character>().level == 1)
+                    {
+                        aidsLevelOne.Add(virus);
+                    }
+                    else if (virus.GetComponent<Character>().level == 2)
+                    {
+                        aidsLevelTwo.Add(virus);
+                    }
+                }
+                else if (virus.name.Contains("Hepatitis"))
+                {
+                    if (virus.GetComponent<Character>().level == 1)
+                    {
+                        hepatitisLevelOne.Add(virus);
+                    }
+                    else if (virus.GetComponent<Character>().level == 2)
+                    {
+                        hepatitisLevelTwo.Add(virus);
+                    }
+                }
+                else if (virus.name.Contains("Herpes"))
+                {
+                    if (virus.GetComponent<Character>().level == 1)
+                    {
+                        herpesLevelOne.Add(virus);
+                    }
+                    else if (virus.GetComponent<Character>().level == 2)
+                    {
+                        herpesLevelTwo.Add(virus);
+                    }
+                }
+                else if (virus.name.Contains("Influenza"))
+                {
+                    if (virus.GetComponent<Character>().level == 1)
+                    {
+                        influenzaLevelOne.Add(virus);
+                    }
+                    else if (virus.GetComponent<Character>().level == 2)
+                    {
+                        influenzaLevelTwo.Add(virus);
+                    }
+                }
+                else if (virus.name.Contains("Junin"))
+                {
+                    if (virus.GetComponent<Character>().level == 1)
+                    {
+                        juninLevelOne.Add(virus);
+                    }
+                    else if (virus.GetComponent<Character>().level == 2)
+                    {
+                        juninLevelTwo.Add(virus);
+                    }
+                }
+                else if (virus.name.Contains("Lassa"))
+                {
+                    if (virus.GetComponent<Character>().level == 1)
+                    {
+                        lassaLevelOne.Add(virus);
+                    }
+                    else if (virus.GetComponent<Character>().level == 2)
+                    {
+                        lassaLevelTwo.Add(virus);
+                    }
+                }
+                else if (virus.name.Contains("Measles"))
+                {
+                    if (virus.GetComponent<Character>().level == 1)
+                    {
+                        measlesLevelOne.Add(virus);
+                    }
+                    else if (virus.GetComponent<Character>().level == 2)
+                    {
+                        measlesLevelTwo.Add(virus);
+                    }
+                }
+                else if (virus.name.Contains("Mumps"))
+                {
+                    if (virus.GetComponent<Character>().level == 1)
+                    {
+                        mumpsLevelOne.Add(virus);
+                    }
+                    else if (virus.GetComponent<Character>().level == 2)
+                    {
+                        mumpsLevelTwo.Add(virus);
+                    }
+                }
+                else if (virus.name.Contains("VZV"))
+                {
+                    if (virus.GetComponent<Character>().level == 1)
+                    {
+                        vzvLevelOne.Add(virus);
+                    }
+                    else if (virus.GetComponent<Character>().level == 2)
+                    {
+                        vzvLevelTwo.Add(virus);
+                    }
+                }
+            }
+
+            bool combinationHappened = false;
+            if (aidsLevelOne.Count > 2)
+            {
+                Destroy(aidsLevelOne[0].gameObject);
+                organs.Remove(aidsLevelOne[0].transform);
+                Destroy(aidsLevelOne[1].gameObject);
+                organs.Remove(aidsLevelOne[1].transform);
+                aidsLevelOne[2].GetComponent<Character>().UpgradeCharacter();
+                combinationHappened = true;
+            }
+            if (aidsLevelTwo.Count > 2)
+            {
+                Destroy(aidsLevelTwo[0].gameObject);
+                organs.Remove(aidsLevelTwo[0].transform);
+                Destroy(aidsLevelTwo[1].gameObject);
+                organs.Remove(aidsLevelTwo[1].transform);
+                aidsLevelTwo[2].GetComponent<Character>().UpgradeCharacter();
+                combinationHappened = true;
+            }
+            if (hepatitisLevelOne.Count > 2)
+            {
+                Destroy(hepatitisLevelOne[0].gameObject);
+                organs.Remove(hepatitisLevelOne[0].transform);
+                Destroy(hepatitisLevelOne[1].gameObject);
+                organs.Remove(hepatitisLevelOne[1].transform);
+                hepatitisLevelOne[2].GetComponent<Character>().UpgradeCharacter();
+                combinationHappened = true;
+            }
+            if (hepatitisLevelTwo.Count > 2)
+            {
+                Destroy(hepatitisLevelTwo[0].gameObject);
+                organs.Remove(hepatitisLevelTwo[0].transform);
+                Destroy(hepatitisLevelTwo[1].gameObject);
+                organs.Remove(hepatitisLevelTwo[1].transform);
+                hepatitisLevelTwo[2].GetComponent<Character>().UpgradeCharacter();
+                combinationHappened = true;
+            }
+
+            if (herpesLevelOne.Count > 2)
+            {
+                Destroy(herpesLevelOne[0].gameObject);
+                organs.Remove(herpesLevelOne[0].transform);
+                Destroy(herpesLevelOne[1].gameObject);
+                organs.Remove(herpesLevelOne[1].transform);
+                herpesLevelOne[2].GetComponent<Character>().UpgradeCharacter();
+                combinationHappened = true;
+            }
+            if (herpesLevelTwo.Count > 2)
+            {
+                Destroy(herpesLevelTwo[0].gameObject);
+                organs.Remove(herpesLevelTwo[0].transform);
+                Destroy(herpesLevelTwo[1].gameObject);
+                organs.Remove(herpesLevelTwo[1].transform);
+                herpesLevelTwo[2].GetComponent<Character>().UpgradeCharacter();
+                combinationHappened = true;
+            }
+            if (influenzaLevelOne.Count > 2)
+            {
+                Destroy(influenzaLevelOne[0].gameObject);
+                organs.Remove(influenzaLevelOne[0].transform);
+                Destroy(influenzaLevelOne[1].gameObject);
+                organs.Remove(influenzaLevelOne[1].transform);
+                influenzaLevelOne[2].GetComponent<Character>().UpgradeCharacter();
+                combinationHappened = true;
+            }
+            if (influenzaLevelTwo.Count > 2)
+            {
+                Destroy(influenzaLevelTwo[0].gameObject);
+                organs.Remove(influenzaLevelTwo[0].transform);
+                Destroy(influenzaLevelTwo[1].gameObject);
+                organs.Remove(influenzaLevelTwo[1].transform);
+                influenzaLevelTwo[2].GetComponent<Character>().UpgradeCharacter();
+                combinationHappened = true;
+            }
+            if (juninLevelOne.Count > 2)
+            {
+                Destroy(juninLevelOne[0].gameObject);
+                organs.Remove(juninLevelOne[0].transform);
+                Destroy(juninLevelOne[1].gameObject);
+                organs.Remove(juninLevelOne[1].transform);
+                juninLevelOne[2].GetComponent<Character>().UpgradeCharacter();
+                combinationHappened = true;
+            }
+            if (juninLevelTwo.Count > 2)
+            {
+                Destroy(juninLevelTwo[0].gameObject);
+                organs.Remove(juninLevelTwo[0].transform);
+                Destroy(juninLevelTwo[1].gameObject);
+                organs.Remove(juninLevelTwo[1].transform);
+                juninLevelTwo[2].GetComponent<Character>().UpgradeCharacter();
+                combinationHappened = true;
+            }
+            if (lassaLevelOne.Count > 2)
+            {
+                Destroy(lassaLevelOne[0].gameObject);
+                organs.Remove(lassaLevelOne[0].transform);
+                Destroy(lassaLevelOne[1].gameObject);
+                organs.Remove(lassaLevelOne[1].transform);
+                lassaLevelOne[2].GetComponent<Character>().UpgradeCharacter();
+                combinationHappened = true;
+            }
+            if (lassaLevelTwo.Count > 2)
+            {
+                Destroy(lassaLevelTwo[0].gameObject);
+                organs.Remove(lassaLevelTwo[0].transform);
+                Destroy(lassaLevelTwo[1].gameObject);
+                organs.Remove(lassaLevelTwo[1].transform);
+                lassaLevelTwo[2].GetComponent<Character>().UpgradeCharacter();
+                combinationHappened = true;
+            }
+            if (measlesLevelOne.Count > 2)
+            {
+                Destroy(measlesLevelOne[0].gameObject);
+                organs.Remove(measlesLevelOne[0].transform);
+                Destroy(measlesLevelOne[1].gameObject);
+                organs.Remove(measlesLevelOne[1].transform);
+                measlesLevelOne[2].GetComponent<Character>().UpgradeCharacter();
+                combinationHappened = true;
+            }
+            if (measlesLevelTwo.Count > 2)
+            {
+                Destroy(measlesLevelTwo[0].gameObject);
+                organs.Remove(measlesLevelTwo[0].transform);
+                Destroy(measlesLevelTwo[1].gameObject);
+                organs.Remove(measlesLevelTwo[1].transform);
+                measlesLevelTwo[2].GetComponent<Character>().UpgradeCharacter();
+                combinationHappened = true;
+            }
+            if (mumpsLevelOne.Count > 2)
+            {
+                Destroy(mumpsLevelOne[0].gameObject);
+                organs.Remove(mumpsLevelOne[0].transform);
+                Destroy(mumpsLevelOne[1].gameObject);
+                organs.Remove(mumpsLevelOne[1].transform);
+                mumpsLevelOne[2].GetComponent<Character>().UpgradeCharacter();
+                combinationHappened = true;
+            }
+            if (mumpsLevelTwo.Count > 2)
+            {
+                Destroy(mumpsLevelTwo[0].gameObject);
+                organs.Remove(mumpsLevelTwo[0].transform);
+                Destroy(mumpsLevelTwo[1].gameObject);
+                organs.Remove(mumpsLevelTwo[1].transform);
+                mumpsLevelTwo[2].GetComponent<Character>().UpgradeCharacter();
+                combinationHappened = true;
+            }
+            if (vzvLevelOne.Count > 2)
+            {
+                Destroy(vzvLevelOne[0].gameObject);
+                organs.Remove(vzvLevelOne[0].transform);
+                Destroy(vzvLevelOne[1].gameObject);
+                organs.Remove(vzvLevelOne[1].transform);
+                vzvLevelOne[2].GetComponent<Character>().UpgradeCharacter();
+                combinationHappened = true;
+            }
+            if (vzvLevelTwo.Count > 2)
+            {
+                Destroy(vzvLevelTwo[0].gameObject);
+                organs.Remove(vzvLevelTwo[0].transform);
+                Destroy(vzvLevelTwo[1].gameObject);
+                organs.Remove(vzvLevelTwo[1].transform);
+                vzvLevelTwo[2].GetComponent<Character>().UpgradeCharacter();
+                combinationHappened = true;
+            }
+
+            if (combinationHappened)
+                CheckForCombineObjects();
         }
     }
 }

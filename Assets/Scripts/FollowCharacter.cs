@@ -80,7 +80,7 @@ public class FollowCharacter : MonoBehaviour
             {
                 //Move towards nearest target
                 self.position += (nearestTarget.position - self.position).normalized * character.moveSpeed * Time.deltaTime;
-                //self.GetComponent<Rigidbody2D>().MovePosition(self.position + (nearestTarget.position - self.position).normalized * character.moveSpeed * Time.deltaTime);
+                //self.GetComponent<Rigidbody2D>().MovePosition(self.position + ((nearestTarget.position - self.position).normalized * character.moveSpeed * 5 * Time.deltaTime));
             }
             else
             {

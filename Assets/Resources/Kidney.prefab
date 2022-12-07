@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3960868063654936000}
   - component: {fileID: 3960868063654936015}
-  - component: {fileID: 3960868063654936014}
   - component: {fileID: 3960868063654936009}
   - component: {fileID: 3960868063654936003}
   - component: {fileID: 3960868063654936001}
@@ -53,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDragging: 0
   lastPos: {x: 0, y: 0}
-  isOrgan: 1
+  isPlayerObject: 0
   isFighting: 0
   isInShop: 0
   level: 0
@@ -63,18 +62,6 @@ MonoBehaviour:
   moveSpeed: 60
   attackSpeed: 2
   attackRange: 30
---- !u!114 &3960868063654936014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3960868063654936011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f11430dba5127114eba2a54373575404, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3960868063654936009
 MonoBehaviour:
   m_ObjectHideFlags: 0

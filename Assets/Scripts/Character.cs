@@ -63,13 +63,12 @@ public class Character : MonoBehaviour
 
     public void Attack(Character pTarget)
     {
-        int dmg = 0;
         timeSinceLastAttack += Time.deltaTime;
         if (timeSinceLastAttack >= attackSpeed)
         {
             timeSinceLastAttack = 0;
 
-            dmg = atk - pTarget.def;
+            int dmg = atk - pTarget.def;
             pTarget.DoDmg(dmg);
 
             print(transform.name + " attacked " + pTarget.name + " with " + dmg + " Dmg!");
@@ -111,7 +110,7 @@ public class Character : MonoBehaviour
 
     public void UpgradeCharacter()
     {
-        transform.localScale *= 1.25f;
+        transform.localScale *= 1.1f;
 
         atk += upgradeMaxAtk;
         maxAtk = atk;
