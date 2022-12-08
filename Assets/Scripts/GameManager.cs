@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(playerHealth >= 0)
+        if(playerHealth <= 0)
             Application.Quit();
 
         //Check if fight is over
