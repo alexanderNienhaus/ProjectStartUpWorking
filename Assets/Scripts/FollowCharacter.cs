@@ -64,7 +64,7 @@ public class FollowCharacter : MonoBehaviour
                     isTouchingEnemy = true;
                 }
             }
-            print(name + " isTouching: " + isTouchingEnemy);
+            //print(name + " isTouching: " + isTouchingEnemy);
 
             //Check if at minimum distance
             if (nearestDistance > GetComponent<Character>().attackRange && !isTouchingEnemy)

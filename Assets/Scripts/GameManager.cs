@@ -144,6 +144,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if(playerHealth >= 0)
+            Application.Quit();
+
         //Check if fight is over
         if (isFighting && (fightingEnemyObjects.Count == 0 || fightingPlayerObjects.Count == 0))
         {
@@ -212,6 +215,8 @@ public class GameManager : MonoBehaviour
                 {
                     currentStreak = -1;
                 }
+                playerHealth -= 15;
+                healthText.SetText(" " + playerHealth + "/100");
                 streakText.SetText("Current streak: " + currentStreak);
                 currentGoldBoost = 0;
                 gold += goldGainPerRound;
