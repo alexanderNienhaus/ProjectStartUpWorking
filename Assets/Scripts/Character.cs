@@ -39,6 +39,8 @@ public class Character : MonoBehaviour
     Transform transform;
     float timeSinceLastAttack;
 
+    List<AudioSource> audioSources;
+
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
@@ -48,6 +50,11 @@ public class Character : MonoBehaviour
         isDragging = false;
         isInShop = true;
         level = 1;
+        audioSources = new List<AudioSource>();
+        foreach (AudioSource audioSource in GetComponents<AudioSource>())
+        {
+            audioSources.Add(audioSource);
+        }
 
         maxDef = def;
         maxAtk = atk;
@@ -71,6 +78,7 @@ public class Character : MonoBehaviour
             int dmg = atk - pTarget.def;
             pTarget.DoDmg(dmg);
 
+            audioSources[0].Play();
             print(transform.name + " attacked " + pTarget.name + " with " + dmg + " Dmg!");
         }
     }
@@ -82,6 +90,7 @@ public class Character : MonoBehaviour
             hp = 0;
         if (hp == 0)
         {
+            Camera.main.GetComponent<AudioSource>().Play();
             isFighting = false;
             if (isPlayerObject)
             {
@@ -131,10 +140,5 @@ public class Character : MonoBehaviour
         maxMoveSpeed = moveSpeed;
 
         level++;
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        
     }
 }
