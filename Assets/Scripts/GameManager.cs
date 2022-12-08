@@ -44,6 +44,10 @@ public class GameManager : MonoBehaviour
     GameObject organSetting;
     GameObject virusSetting;
 
+    TextMeshProUGUI healthText;
+    public int playerHealth;
+    Animator anim;
+
     void Awake()
     {
         organSceneActive = true;
@@ -62,6 +66,12 @@ public class GameManager : MonoBehaviour
         virusSetting.SetActive(false);
 
         isFighting = false;
+
+        playerHealth = 100;
+        anim = GameObject.FindGameObjectWithTag("blueLight").GetComponent<Animator>();
+
+        healthText = GameObject.FindGameObjectWithTag("HealthText").GetComponent<TextMeshProUGUI>();
+        healthText.SetText(" " + playerHealth + "/100");
 
         roundNumber = 1;
         roundText = GameObject.FindGameObjectWithTag("RoundText").GetComponent<TextMeshProUGUI>();
@@ -297,6 +307,20 @@ public class GameManager : MonoBehaviour
             shopObjetcs.Clear();
             shopObjetcs.AddRange(organSceneActive ? frozenShopOrgans : frozenShopViruses);
             SpawnShop();
+        }
+
+        if (playerHealth < 40)
+        {
+            anim.SetBool("lowHP", true);
+        }
+
+        healthText.SetText("" + playerHealth);
+
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            playerHealth -= 15;
+            
         }
     }
 

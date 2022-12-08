@@ -122,7 +122,7 @@ MonoBehaviour:
   level: 0
   atk: 15
   def: 2
-  hp: 25
+  hp: 20
   moveSpeed: 20
   attackSpeed: 2
   attackRange: 150
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_HasRenderer: 1
   m_UseRendererSilhouette: 1
-  m_CastsShadows: 0
+  m_CastsShadows: 1
   m_SelfShadows: 0
   m_ApplyToSortingLayers: 00000000cfc769af6b4898dfdb990913274d42f0e7e9f52c5b5ce8352f1cdfc1
   m_ShapePath:
@@ -156,7 +156,7 @@ MonoBehaviour:
   - {x: 0.7715047, y: -6.9866343, z: -0.0000000023193678}
   m_ShapePathHash: -970192600
   m_Mesh: {fileID: 0}
-  m_InstanceId: -36932
+  m_InstanceId: 28564
 --- !u!50 &4630659685772870371
 Rigidbody2D:
   serializedVersion: 4

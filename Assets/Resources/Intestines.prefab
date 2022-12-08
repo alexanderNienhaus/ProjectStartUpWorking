@@ -160,19 +160,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShadowGroup: 0
   m_ComponentVersion: 1
-  m_HasRenderer: 0
+  m_HasRenderer: 1
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
   m_SelfShadows: 0
   m_ApplyToSortingLayers: 00000000cfc769af6b4898dfdb990913274d42f0e7e9f52c5b5ce8352f1cdfc1
   m_ShapePath:
-  - {x: -10.2400055, y: -10.240002, z: 0}
-  - {x: -10.2400055, y: 10.239998, z: 0}
-  - {x: 10.239998, y: 10.239998, z: 0}
-  - {x: 10.239998, y: -10.240002, z: 0}
-  m_ShapePathHash: 0
+  - {x: -7.438831, y: -4.693654, z: 0}
+  - {x: -7.4948583, y: 7.662913, z: 0}
+  - {x: -0.14007102, y: 5.406292, z: 0}
+  - {x: 5.982185, y: 7.7749577, z: 0}
+  - {x: 4.189431, y: -6.990624, z: 0}
+  - {x: -0.14007102, y: -5.7984514, z: 0}
+  - {x: -1.540664, y: -8.207477, z: 0}
+  - {x: -3.8376338, y: -5.686407, z: 0}
+  m_ShapePathHash: -435294329
   m_Mesh: {fileID: 0}
-  m_InstanceId: -876938
+  m_InstanceId: 28702
 --- !u!50 &-3389899224741835201
 Rigidbody2D:
   serializedVersion: 4

@@ -160,19 +160,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShadowGroup: 0
   m_ComponentVersion: 1
-  m_HasRenderer: 0
+  m_HasRenderer: 1
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
   m_SelfShadows: 0
   m_ApplyToSortingLayers: 00000000cfc769af6b4898dfdb990913274d42f0e7e9f52c5b5ce8352f1cdfc1
   m_ShapePath:
-  - {x: -10.2400055, y: -10.239998, z: 0}
-  - {x: -10.2400055, y: 10.239998, z: 0}
-  - {x: 10.2400055, y: 10.239998, z: 0}
-  - {x: 10.2400055, y: -10.239998, z: 0}
-  m_ShapePathHash: 0
+  - {x: -9.735803, y: -6.0382166, z: 0}
+  - {x: -8.895436, y: -0.74066085, z: 0}
+  - {x: -6.918938, y: 0.14006217, z: 0}
+  - {x: -2.2689576, y: -1.8767926, z: 0}
+  - {x: -0.5322318, y: -0.084032804, z: 0}
+  - {x: -2.4930525, y: 6.638821, z: 0}
+  - {x: -1.2045166, y: 7.36712, z: 0}
+  - {x: -0.4201843, y: 5.742441, z: 0}
+  - {x: 2.1569078, y: 7.8713436, z: 0}
+  - {x: 5.926186, y: 7.943024, z: 0}
+  - {x: 8.151458, y: 5.742441, z: 0}
+  - {x: 9.103851, y: 2.2689695, z: 0}
+  - {x: 7.382803, y: -2.1725783, z: 0}
+  - {x: 3.8936539, y: -6.3586917, z: 0}
+  - {x: -0.19608936, y: -8.039404, z: 0}
+  - {x: -4.3978596, y: -6.918929, z: 0}
+  - {x: -7.3671284, y: -4.734003, z: 0}
+  - {x: -7.4791756, y: -7.030977, z: 0}
+  m_ShapePathHash: 1672704917
   m_Mesh: {fileID: 0}
-  m_InstanceId: -879050
+  m_InstanceId: 29236
 --- !u!50 &-7782983493508206077
 Rigidbody2D:
   serializedVersion: 4
