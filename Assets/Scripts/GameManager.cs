@@ -29,10 +29,10 @@ public class GameManager : MonoBehaviour
     public int goldCostOfBuy;
     public int goldGainOnSell;
     public int startGold;
-    public int fieldBorderLeft;
-    public int fieldBorderRight;
-    public int fieldBorderTop;
-    public int fieldBorderBot;
+    float fieldBorderLeft;
+    float fieldBorderRight;
+    float fieldBorderTop;
+    float fieldBorderBot;
 
     TextMeshProUGUI goldText;
     int currentGoldBoost;
@@ -97,7 +97,10 @@ public class GameManager : MonoBehaviour
         freeze = GameObject.FindGameObjectWithTag("Freeze").transform;
         sell = GameObject.FindGameObjectWithTag("Sell").transform;
 
-        DontDestroyOnLoad(this.gameObject);
+        fieldBorderTop = GameObject.FindGameObjectWithTag("TopBorder").transform.position.y - 50;
+        fieldBorderBot = GameObject.FindGameObjectWithTag("BotBorder").transform.position.y + 50;
+        fieldBorderLeft = GameObject.FindGameObjectWithTag("LeftBorder").transform.position.x + 50;
+        fieldBorderRight = GameObject.FindGameObjectWithTag("RightBorder").transform.position.x - 50;
     }
 
     public void StartRound()
@@ -113,6 +116,9 @@ public class GameManager : MonoBehaviour
         //Get fighting organs
         foreach (Transform playerObject in organSceneActive ? organs : viruses)
         {
+            if (playerObject == null)
+                continue;
+
             if (!(playerObject.position.x > roster.position.x - roster.gameObject.GetComponent<SpriteRenderer>().bounds.size.x / 2
                 && playerObject.position.x < roster.position.x + roster.gameObject.GetComponent<SpriteRenderer>().bounds.size.x / 2
                 && playerObject.position.y > roster.position.y - roster.gameObject.GetComponent<SpriteRenderer>().bounds.size.y / 2
@@ -161,7 +167,7 @@ public class GameManager : MonoBehaviour
                 if (positionOccupied)
                     continue;
 
-                print("Resetting position for "+ (organSceneActive ? organs : viruses)[i].name + " at " + rosterPosition.name);
+                print("Resetting position for " + (organSceneActive ? organs : viruses)[i].name + " at " + rosterPosition.name);
                 (organSceneActive ? organs : viruses)[i].position = rosterPosition.position;
                 (organSceneActive ? organs : viruses)[i].GetComponent<Character>().lastPos = rosterPosition.position;
                 i++;
@@ -267,7 +273,7 @@ public class GameManager : MonoBehaviour
 
                 foreach (Transform froozenShopOrgan in frozenShopOrgans)
                 {
-                    if(froozenShopOrgan != null)
+                    if (froozenShopOrgan != null)
                         froozenShopOrgan.gameObject.SetActive(true);
                 }
 
@@ -279,7 +285,7 @@ public class GameManager : MonoBehaviour
             }
 
             //Free roll??
-            print("organSceneActive: "+organSceneActive);
+            print("organSceneActive: " + organSceneActive);
             foreach (Transform shopObject in shopObjetcs)
             {
                 if (!(!organSceneActive ? frozenShopOrgans : frozenShopViruses).Contains(shopObject) && shopObject != null)
@@ -355,7 +361,7 @@ public class GameManager : MonoBehaviour
             }
 
             GameObject enemy = (GameObject)Instantiate(Resources.Load(enemyName, typeof(GameObject)),
-                new Vector3(r.Next(fieldBorderLeft, fieldBorderRight), r.Next(fieldBorderBot, fieldBorderTop), 0), Quaternion.identity);
+                new Vector3(r.Next((int)fieldBorderLeft, (int)fieldBorderRight), r.Next((int)fieldBorderBot, (int)fieldBorderTop), 0), Quaternion.identity);
             fightingEnemyObjects.Add(enemy.transform);
             enemy.GetComponent<Character>().isFighting = true;
             enemy.GetComponent<Character>().isPlayerObject = false;
@@ -366,6 +372,8 @@ public class GameManager : MonoBehaviour
     {
         foreach (Transform shopPosition in shopPositions)
         {
+            //print(shopPosition.name + " Posi: " + shopPosition.position);
+
             //Put only in open shop position
             bool positionOccupied = false;
             foreach (Transform frozenObject in organSceneActive ? frozenShopOrgans : frozenShopViruses)
@@ -672,7 +680,8 @@ public class GameManager : MonoBehaviour
 
             if (combinationHappened)
                 CheckForCombineObjects();
-        } else
+        }
+        else
         {
             List<Transform> aidsLevelOne = new List<Transform>();
             List<Transform> hepatitisLevelOne = new List<Transform>();

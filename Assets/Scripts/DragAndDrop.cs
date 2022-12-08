@@ -40,12 +40,6 @@ public class DragAndDrop : MonoBehaviour
                 target.GetComponent<SpriteRenderer>().sortingLayerName = "Organs";
                 target.GetComponent<CapsuleCollider2D>().enabled = true;
 
-                /**
-                if (Input.mousePosition.x > Camera.main.WorldToScreenPoint(roster.position).x - roster.gameObject.GetComponent<SpriteRenderer>().bounds.size.x / 2
-                    && Input.mousePosition.x < Camera.main.WorldToScreenPoint(roster.position).x + roster.gameObject.GetComponent<SpriteRenderer>().bounds.size.x / 2
-                    && Input.mousePosition.y > Camera.main.WorldToScreenPoint(roster.position).y - roster.gameObject.GetComponent<SpriteRenderer>().bounds.size.y / 2
-                    && Input.mousePosition.y < Camera.main.WorldToScreenPoint(roster.position).y + roster.gameObject.GetComponent<SpriteRenderer>().bounds.size.y / 2)
-                **/
                 if (roster.GetComponent<BoxCollider2D>().OverlapPoint(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(Camera.main.transform.position.z)))))
                 {
                     //In roster
@@ -53,12 +47,6 @@ public class DragAndDrop : MonoBehaviour
                     Transform droppedOnRosterPos = null;
                     foreach (Transform rosterPos in rosterPositions)
                     {
-                        /**
-                        if (Input.mousePosition.x > Camera.main.WorldToScreenPoint(rosterPos.position).x - rosterPos.gameObject.GetComponent<SpriteRenderer>().bounds.size.x / 2
-                            && Input.mousePosition.x < Camera.main.WorldToScreenPoint(rosterPos.position).x + rosterPos.gameObject.GetComponent<SpriteRenderer>().bounds.size.x / 2
-                            && Input.mousePosition.y > Camera.main.WorldToScreenPoint(rosterPos.position).y - rosterPos.gameObject.GetComponent<SpriteRenderer>().bounds.size.y / 2
-                            && Input.mousePosition.y < Camera.main.WorldToScreenPoint(rosterPos.position).y + rosterPos.gameObject.GetComponent<SpriteRenderer>().bounds.size.y / 2)
-                        **/
                         if (rosterPos.GetComponent<BoxCollider2D>().OverlapPoint(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(Camera.main.transform.position.z)))))
                         {
                             droppedOnRosterPos = rosterPos;
@@ -120,13 +108,6 @@ public class DragAndDrop : MonoBehaviour
                             break;
                         }
                     }
-                    /**
-                    else if (Input.mousePosition.x > Camera.main.WorldToScreenPoint(gameManager.freeze.position).x - gameManager.freeze.gameObject.GetComponent<SpriteRenderer>().bounds.size.x / 2
-                          && Input.mousePosition.x < Camera.main.WorldToScreenPoint(gameManager.freeze.position).x + gameManager.freeze.gameObject.GetComponent<SpriteRenderer>().bounds.size.x / 2
-                          && Input.mousePosition.y > Camera.main.WorldToScreenPoint(gameManager.freeze.position).y - gameManager.freeze.gameObject.GetComponent<SpriteRenderer>().bounds.size.y / 2
-                          && Input.mousePosition.y < Camera.main.WorldToScreenPoint(gameManager.freeze.position).y + gameManager.freeze.gameObject.GetComponent<SpriteRenderer>().bounds.size.y / 2
-                          && target.GetComponent<Character>().isInShop)
-                    **/
                     else if (gameManager.freeze.GetComponent<BoxCollider2D>().OverlapPoint(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(Camera.main.transform.position.z))))
                         && target.GetComponent<Character>().isInShop)
                     {
@@ -136,13 +117,6 @@ public class DragAndDrop : MonoBehaviour
                         gameManager.FreezeShopObject(target.gameObject);
                         break;
                     }
-                    /**
-                    else if (Input.mousePosition.x > Camera.main.WorldToScreenPoint(gameManager.sell.position).x - gameManager.sell.gameObject.GetComponent<SpriteRenderer>().bounds.size.x / 2
-                        && Input.mousePosition.x < Camera.main.WorldToScreenPoint(gameManager.sell.position).x + gameManager.sell.gameObject.GetComponent<SpriteRenderer>().bounds.size.x / 2
-                        && Input.mousePosition.y > Camera.main.WorldToScreenPoint(gameManager.sell.position).y - gameManager.sell.gameObject.GetComponent<SpriteRenderer>().bounds.size.y / 2
-                        && Input.mousePosition.y < Camera.main.WorldToScreenPoint(gameManager.sell.position).y + gameManager.sell.gameObject.GetComponent<SpriteRenderer>().bounds.size.y / 2
-                        && !target.GetComponent<Character>().isInShop)
-                    **/
                     else if (gameManager.sell.GetComponent<BoxCollider2D>().OverlapPoint(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(Camera.main.transform.position.z))))
                         && !target.GetComponent<Character>().isInShop)
                     {
@@ -230,16 +204,6 @@ public class DragAndDrop : MonoBehaviour
                 target.GetComponent<Character>().isDragging = true;
                 target.GetComponent<SpriteRenderer>().sortingLayerName = "DragOrgan";
             }
-            /**
-else if (Input.GetMouseButtonDown(0) &&
-                target.GetComponent<CapsuleCollider2D>().OverlapPoint(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(Camera.main.transform.position.z)))))
-{
-    print("Picking up target");
-    target.GetComponent<CapsuleCollider2D>().enabled = false;
-    target.GetComponent<Character>().isDragging = true;
-    target.GetComponent<SpriteRenderer>().sortingLayerName = "DragOrgan";
-}
-            **/
 
             if (target.GetComponent<Character>().isDragging)
             {

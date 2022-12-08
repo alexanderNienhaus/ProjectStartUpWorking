@@ -6,9 +6,7 @@ public class FollowCharacter : MonoBehaviour
 {
     GameManager gameManager;
     List<Transform> targets;
-    Transform self;
     Transform nearestTarget;
-    Character character;
     float nearestDistance;
 
     void Start()
@@ -16,8 +14,6 @@ public class FollowCharacter : MonoBehaviour
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         nearestDistance = 0;
         targets = new List<Transform>();
-        self = GetComponent<Transform>();
-        character = GetComponent<Character>();
     }
 
     void Update()
@@ -29,7 +25,7 @@ public class FollowCharacter : MonoBehaviour
         nearestDistance = 0;
 
         //Get list of targets
-        if (character.isPlayerObject)
+        if (GetComponent<Character>().isPlayerObject)
         {
             targets.Clear();
             targets.AddRange(gameManager.fightingEnemyObjects);
@@ -43,7 +39,7 @@ public class FollowCharacter : MonoBehaviour
         //Get nearest target from all targets
         foreach (Transform target in targets)
         {
-            float targetDistance = (target.position - self.position).magnitude;
+            float targetDistance = (target.position - transform.position).magnitude;
             if (nearestDistance == 0 || targetDistance <= nearestDistance)
             {
                 nearestDistance = targetDistance;
@@ -51,41 +47,36 @@ public class FollowCharacter : MonoBehaviour
             }
         }
 
-        bool isTouchingEnemy = false;
-        if (GetComponent<Character>().isPlayerObject)
-        {
-            foreach (Transform enemy in gameManager.fightingEnemyObjects)
-            {
-                if (GetComponent<Rigidbody2D>().IsTouching(enemy.GetComponent<CapsuleCollider2D>()))
-                {
-                    isTouchingEnemy = true;
-                }
-            }
-        }
-        else
-        {
-            foreach (Transform organ in gameManager.fightingPlayerObjects)
-            {
-                if (GetComponent<Rigidbody2D>().IsTouching(organ.GetComponent<CapsuleCollider2D>()))
-                {
-                    isTouchingEnemy = true;
-                }
-            }
-        }
-
         if (nearestTarget != null)
         {
+            bool isTouchingEnemy = false;
+            if (GetComponent<Character>().isPlayerObject)
+            {
+                if (GetComponent<Rigidbody2D>().IsTouching(nearestTarget.GetComponent<CapsuleCollider2D>()))
+                {
+                    isTouchingEnemy = true;
+                }
+            }
+            else
+            {
+                if (GetComponent<Rigidbody2D>().IsTouching(nearestTarget.GetComponent<CapsuleCollider2D>()))
+                {
+                    isTouchingEnemy = true;
+                }
+            }
+            print(name + " isTouching: " + isTouchingEnemy);
+
             //Check if at minimum distance
             if (nearestDistance > GetComponent<Character>().attackRange && !isTouchingEnemy)
             {
                 //Move towards nearest target
-                self.position += (nearestTarget.position - self.position).normalized * character.moveSpeed * Time.deltaTime;
-                //self.GetComponent<Rigidbody2D>().MovePosition(self.position + ((nearestTarget.position - self.position).normalized * character.moveSpeed * 5 * Time.deltaTime));
+                //self.position += (nearestTarget.position - self.position).normalized * character.moveSpeed * Time.deltaTime;
+                GetComponent<Rigidbody2D>().MovePosition(transform.position + ((nearestTarget.position - transform.position).normalized * GetComponent<Character>().moveSpeed * Time.deltaTime));
             }
             else
             {
                 //Attack
-                self.GetComponent<Character>().Attack(nearestTarget.GetComponent<Character>());
+                GetComponent<Character>().Attack(nearestTarget.GetComponent<Character>());
             }
         }
     }

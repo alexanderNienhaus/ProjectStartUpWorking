@@ -21,6 +21,10 @@ TagManager:
   - RoundCounter
   - OrganSetting
   - VirusSetting
+  - TopBorder
+  - BotBorder
+  - LeftBorder
+  - RightBorder
   layers:
   - Default
   - TransparentFX
