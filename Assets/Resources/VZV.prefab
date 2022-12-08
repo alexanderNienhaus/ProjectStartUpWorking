@@ -126,7 +126,7 @@ MonoBehaviour:
   atk: 15
   def: 2
   hp: 25
-  moveSpeed: 20
+  moveSpeed: 80
   attackSpeed: 2
   attackRange: 150
 --- !u!114 &7497642744579520241

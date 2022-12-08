@@ -125,8 +125,8 @@ MonoBehaviour:
   level: 0
   atk: 15
   def: 2
-  hp: 25
-  moveSpeed: 20
+  hp: 40
+  moveSpeed: 35
   attackSpeed: 2
   attackRange: 150
 --- !u!114 &7625055373819692469

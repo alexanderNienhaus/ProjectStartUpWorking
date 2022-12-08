@@ -58,12 +58,12 @@ MonoBehaviour:
   isFighting: 0
   isInShop: 0
   level: 0
-  atk: 5
-  def: 3
+  atk: 15
+  def: 4
   hp: 50
   moveSpeed: 60
   attackSpeed: 2
-  attackRange: 30
+  attackRange: 50
 --- !u!114 &2586084433994002684
 MonoBehaviour:
   m_ObjectHideFlags: 0

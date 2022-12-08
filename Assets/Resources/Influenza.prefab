@@ -122,9 +122,9 @@ MonoBehaviour:
   isFighting: 0
   isInShop: 0
   level: 0
-  atk: 1
+  atk: 15
   def: 1
-  hp: 5
+  hp: 20
   moveSpeed: 60
   attackSpeed: 2
   attackRange: 50

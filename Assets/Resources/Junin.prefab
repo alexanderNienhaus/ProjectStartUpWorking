@@ -122,12 +122,12 @@ MonoBehaviour:
   isFighting: 0
   isInShop: 0
   level: 0
-  atk: 1
+  atk: 30
   def: 1
-  hp: 5
+  hp: 25
   moveSpeed: 60
-  attackSpeed: 2
-  attackRange: 50
+  attackSpeed: 3
+  attackRange: 100
 --- !u!95 &177948482059090737
 Animator:
   serializedVersion: 4
